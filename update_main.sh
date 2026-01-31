@@ -63,7 +63,8 @@ print_info "Project name: ${YELLOW}$PROJECT_NAME${NC}"
 echo ""
 
 # Confirm with user
-read -p "$(echo -e ${YELLOW}⚠️  This will replace ALL content in main branch with $CURRENT_BRANCH. Continue? [y/N]: ${NC})" -n 1 -r
+echo -e "${YELLOW}⚠️  This will replace ALL content in main branch with $CURRENT_BRANCH. Continue? [y/N]: ${NC}"
+read -n 1 -r REPLY
 echo ""
 
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -134,10 +135,11 @@ print_success "Commit created"
 
 # Step 7: Force push to remote
 print_info "Step 7/7: Pushing to remote repository..."
-read -p "$(echo -e ${YELLOW}Push to remote (force push required)? [y/N]: ${NC})" -n 1 -r
+echo -e "${YELLOW}Push to remote (force push required)? [y/N]: ${NC}"
+read -n 1 -r REPLY2
 echo ""
 
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if [[ $REPLY2 =~ ^[Yy]$ ]]; then
     git push origin main --force
     print_success "Main branch updated on remote!"
 else
